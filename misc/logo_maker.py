@@ -9,7 +9,7 @@ Since the goal of hub-ology is to inspire rural areas to do 'big tech'
 it's only fitting that the logo generation for the site 
 provide some educational value.  The utility uses 2010 census data 
 to get population information for towns in Spartanburg, SC.
-It uses the geopy module to determine the latitude and longtitude 
+It uses the geopy module to determine the latitude and longitude 
 for each town.  It uses networkx and matplotlib to generate 
 an undirected graph of the towns connecting to Spartanburg
 (the hub-city).  The distances between nodes represent miles 
@@ -52,14 +52,14 @@ def geotag_towns(towns):
         geoinfo = g.geocode(town['name'])
         town['latlng'] = geoinfo[1]
 
-def calculate_distances(towns, hubtown=None):    
+def calculate_distances(towns, hub_town=None):
     for start_town in towns:
         dist_info = {}
         for end_town in towns:
             if start_town['name'] != end_town['name']:
                 record_distance = True
-                if hubtown is not None:
-                    if end_town['name'] != hubtown['name']:
+                if hub_town is not None:
+                    if end_town['name'] != hub_town['name']:
                         record_distance = False
                 if record_distance:    
                     dist_info[end_town['name']] = distance.distance(start_town['latlng'], end_town['latlng']).miles

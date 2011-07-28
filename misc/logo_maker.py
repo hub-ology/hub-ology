@@ -13,13 +13,15 @@ It uses the geopy module to determine the latitude and longitude
 for each town.  It uses networkx and matplotlib to generate 
 an undirected graph of the towns connecting to Spartanburg
 (the hub-city).  The distances between nodes represent miles 
-between the towns and Spartanburg.  The side of each node 
+between the towns and Spartanburg.  The size of each node 
 is based on the 2010 population for the town it represents.
 
 """
 
-from geopy import distance, geocoders
+from geopy import distance
 from matplotlib import pyplot
+from matplotlib.colors import ColorConverter
+from matplotlib.colors import ListedColormap
 import networkx
 import csv
 import sys
@@ -42,15 +44,9 @@ def clean_town_data(raw_towns):
         town = {}
         town['name'] = raw_town['GEO'].replace(' CDP,', ',').replace(' town,',',').replace(' city,',',')
         town['population'] = int(raw_town['Population Count (100%)'][1:])
+        town['latlng'] = (float(raw_town['Internal Point (Latitude)'][1:]) , float(raw_town['Internal Point (Longitude)'][1:]))
         towns.append(town)
     return towns
-
-def geotag_towns(towns):
-    g = geocoders.Google()
-
-    for town in towns:
-        geoinfo = g.geocode(town['name'])
-        town['latlng'] = geoinfo[1]
 
 def calculate_distances(towns, hub_town=None):
     for start_town in towns:
@@ -76,7 +72,6 @@ def main(census_file):
                   'Wellford, South Carolina', 'Saxon, South Carolina')
     
     towns = clean_town_data(load_census_data(census_file))
-    geotag_towns(towns)
     calculate_distances(towns, towns[-5])
     #calculate_distances(towns)
         
@@ -93,11 +88,14 @@ def main(census_file):
             for end_town, miles in town['distances'].items():
                 miles_graph.add_edge(town['name'], end_town, weight=int(miles))
         
+    old_glory = ListedColormap([ColorConverter().to_rgb('#FFFFFF'), 
+                                ColorConverter().to_rgb('#0052A5'),
+                                ColorConverter().to_rgb('#E0162B')], name='Old Glory')        
     pyplot.figure(figsize=(12,12))
     networkx.draw(miles_graph,miles_graph.position,
                 node_size=[miles_graph.population[v] for v in miles_graph],
                 node_color=range(len(miles_graph)),
-                cmap=pyplot.cm.Blues,
+                cmap=old_glory,
                 with_labels=False)
 
     #Save the graph in png and svg formats

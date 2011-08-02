@@ -1,0 +1,91 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>hub-ology: big tech, small towns</title>
+	<meta name="description" content="hub-ology promotes big tech in small towns">
+	<meta name="author" content="hub-ology">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="author" href="static/humans.txt" />
+	<link rel="shortcut icon" href="static/favicon.ico">
+	<link rel="apple-touch-icon" href="static/apple-touch-icon.png">
+	<link rel="stylesheet" href="static/css/reset.css" />
+	<link rel="stylesheet" href="static/css/text.css" />
+	<link rel="stylesheet" href="static/css/960_12_col.css" />	
+	<link rel="stylesheet" href="static/css/style.css?v=2">
+	<link rel="stylesheet" media="handheld" href="static/css/handheld.css?v=2">		
+	<script src="static/js/libs/modernizr-1.7.min.js"></script>
+</head>
+<body>
+	{% block header %}
+	<div id="container" class="container_12">
+	  <div id="nav">
+		<div class="grid_2">
+		    <header>
+			  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
+		    </header>
+		</div>
+		<div class="grid_10">
+		    <nav>
+				<ul>
+					<li><a href="/technologists">technologists</a></li>
+					<li><a href="/mentors">mentors</a></li>
+					<li><a href="/educators">educators</a></li>
+			    </ul>
+		    </nav>
+		</div>
+	  </div>		
+	</div>
+	{% endblock %}
+
+	{% block content %}
+	{% endblock %}
+	
+	{% block footer %}	
+	<footer >
+		<section class="container12">
+			<div class="grid_12">
+				<ul>
+					<li>
+						<a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">
+						   <img alt="Creative Commons License"
+								src="http://i.creativecommons.org/l/by/3.0/88x31.png" />
+						</a>						
+					</li>
+					<li><a href="/map">map</a></li>					
+					<li><a href="/projects">projects</a></li>					
+					<li><a href="https://github.com">github</a></li>					
+					<li><a href="https://bitbucket.org/hubology">Bitbucket</a></li>
+					<li><a href="https://www.facebook.com/pages/Hub-ology/170760142994999">Facebook</a></li>
+					<li><a href="https://twitter.com/#!/hubology">Twitter</a></li>
+					<li><a href="/about">About</a></li>
+				</ul>
+			</div>						
+		</section>
+	</footer>
+	{% endblock %}
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="static/js/libs/jquery-1.5.1.min.js"%3E%3C/script%3E'))</script>
+	<script src="static/js/plugins.js"></script>
+	<script src="static/js/script.js"></script>
+	<!--[if lt IE 7 ]>
+	<script src="static/js/libs/dd_belatedpng.js"></script>
+	<script> DD_belatedPNG.fix('img, .png_bg');</script>
+	<![endif]-->
+	<script>
+		var _gaq=[['_setAccount','UA-23777118-1'],['_trackPageview']];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
+</html>

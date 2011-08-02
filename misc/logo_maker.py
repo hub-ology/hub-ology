@@ -91,16 +91,36 @@ def main(census_file):
     old_glory = ListedColormap([ColorConverter().to_rgb('#FFFFFF'), 
                                 ColorConverter().to_rgb('#0052A5'),
                                 ColorConverter().to_rgb('#E0162B')], name='Old Glory')        
+
+    orange_hex = '#FF6600'
+    blaze_orange = ListedColormap([ColorConverter().to_rgb(orange_hex)], name='Blaze Orange')
+
+    #Old Glory Logo
     pyplot.figure(figsize=(12,12))
     networkx.draw(miles_graph,miles_graph.position,
                 node_size=[miles_graph.population[v] for v in miles_graph],
                 node_color=range(len(miles_graph)),
                 cmap=old_glory,
-                with_labels=False)
+                with_labels=False, width=2)
 
     #Save the graph in png and svg formats
-    pyplot.savefig("logo.png")    
-    pyplot.savefig("logo.svg")       
+    pyplot.savefig("logo.png", dpi=300, transparent=True)    
+    pyplot.savefig("logo.svg", transparent=True)       
+
+
+    #Blaze Orange Logo
+    pyplot.figure(figsize=(12,12))
+    networkx.draw(miles_graph,miles_graph.position,
+                node_size=[miles_graph.population[v] for v in miles_graph],
+                node_color=range(len(miles_graph)),
+                cmap=blaze_orange, 
+                with_labels=False, width=2, edge_color=orange_hex)
+
+    #Save the graph in png and svg formats
+    pyplot.savefig("orange_logo.png", dpi=300, transparent=True)    
+    pyplot.savefig("orange_logo.svg", transparent=True)       
+
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

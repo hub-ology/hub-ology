@@ -26,6 +26,12 @@ def templated(template=None):
         return decorated_function
     return decorator
         
+# @app.route('/')
+# @templated('index.html')
+# def index():
+#     #render the main site page
+#     return dict()
+
 @app.route('/')
 @templated('splash-index.html')
 def index():

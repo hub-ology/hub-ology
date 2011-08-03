@@ -120,8 +120,6 @@ def main(census_file):
     pyplot.savefig("orange_logo.png", dpi=300, transparent=True)    
     pyplot.savefig("orange_logo.svg", transparent=True)       
 
-
-
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         census_file = sys.argv[1]

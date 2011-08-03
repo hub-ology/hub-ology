@@ -26,14 +26,24 @@ def templated(template=None):
         return decorated_function
     return decorator
         
+@app.route('/')
+@templated('index.html')
+def index():
+    #render the main site page
+    return dict()
+
 # @app.route('/')
-# @templated('index.html')
+# @templated('splash-index.html')
 # def index():
 #     #render the main site page
 #     return dict()
 
-@app.route('/')
-@templated('splash-index.html')
-def index():
-    #render the main site page
-    return dict()
+#Import other views
+import hubology.views.about
+import hubology.views.educators
+import hubology.views.mentors
+import hubology.views.technologists
+import hubology.views.inspire
+import hubology.views.educate
+import hubology.views.do
+

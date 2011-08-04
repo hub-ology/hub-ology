@@ -44,6 +44,7 @@ import hubology.views.aboutlogo
 import hubology.views.educators
 import hubology.views.mentors
 import hubology.views.developers
+import hubology.views.designers
 import hubology.views.inspire
 import hubology.views.educate
 import hubology.views.do

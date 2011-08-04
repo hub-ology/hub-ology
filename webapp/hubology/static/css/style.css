@@ -105,6 +105,9 @@ a:hover { color: #E0162B; }
 .intro h1 a, .intro h1 a:active, .intro h1 a:visited { color: #E0162B; text-decoration: none; }
 .intro h1 a:hover { color: #0052A5; }
 
+a.red_link,.a.red_link:active, a.red_link:visited { color: #E0162B; text-decoration: none; }
+a.red_link:hover { color: #0052A5; }
+
 .about p {
     font-size:16px;
 }

@@ -242,7 +242,9 @@ footer li a {
     font-size:12px;
 }
 
-
+.page_detail {
+    padding: 34px 0px 0px 0px;
+}
 
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }

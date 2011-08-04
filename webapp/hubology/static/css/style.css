@@ -98,14 +98,16 @@ a, a:active, a:visited { color: #0052A5; text-decoration: none; }
 a:hover { color: #E0162B; }
 
 .intro {
-    height: 150px;
-    margin: 15px 0px 0px 0px;
+    height: 130px;
+    margin: 10px 0px 0px 0px;
 }
 
 .intro h1 a, .intro h1 a:active, .intro h1 a:visited { color: #E0162B; text-decoration: none; }
 .intro h1 a:hover { color: #0052A5; }
 
-
+.about p {
+    font-size:16px;
+}
 
 ul {
     list-style: square outside none;
@@ -152,8 +154,8 @@ div.small_red_thought_circle {
 
 div.small_blue_thought_circle {
     padding: 1em;
-    border-color: #E6E6E6;
-    border-right: 1px solid #E6E6E6;
+    border-color: #0052A5;
+    border-right: 1px solid #0052A5;
     border-style: solid;
     border-width: 1px 1px 1px;    
 	background-color: #0052A5;
@@ -226,10 +228,10 @@ nav li {
 
 footer ul {
     list-style-type:none;
-  padding: 34px;
+    padding: 34px 0px 0px 0px;
 }
 footer li {
-  float: right;
+  float: left;
 }
 
 footer li a {

@@ -1,6 +1,6 @@
 from hubology import app, templated
 
-@app.route('/technologists')
+@app.route('/developers')
 @templated()
-def technologists():
+def developers():
     return dict()

@@ -14,15 +14,15 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="author" href="static/humans.txt" />
-	<link rel="shortcut icon" href="static/favicon.ico">
-	<link rel="apple-touch-icon" href="static/apple-touch-icon.png">
-	<link rel="stylesheet" href="static/css/reset.css" />
-	<link rel="stylesheet" href="static/css/text.css" />
-	<link rel="stylesheet" href="static/css/960_12_col.css" />	
-	<link rel="stylesheet" href="static/css/style.css?v=2">
-	<link rel="stylesheet" media="handheld" href="static/css/handheld.css?v=2">		
-	<script src="static/js/libs/modernizr-1.7.min.js"></script>
+	<link rel="author" href="/static/humans.txt" />
+	<link rel="shortcut icon" href="/static/favicon.ico">
+	<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+	<link rel="stylesheet" href="/static/css/reset.css" />
+	<link rel="stylesheet" href="/static/css/text.css" />
+	<link rel="stylesheet" href="/static/css/960_12_col.css" />	
+	<link rel="stylesheet" href="/static/css/style.css?v=2">
+	<link rel="stylesheet" media="handheld" href="/static/css/handheld.css?v=2">		
+	<script src="/static/js/libs/modernizr-1.7.min.js"></script>
 </head>
 <body>
 	{% block header %}
@@ -37,9 +37,10 @@
 		    <nav>
 				<ul>
 					<li><a href="/mentors">mentors</a></li>
-					<li><a href="/designers">designers</a></li>
-					<li><a href="/educators">educators</a></li>
-					<li><a href="/technologists">technologists</a></li>
+					<li><a href="/educators">educators</a> +</li>
+					<li><a href="/developers">developers</a> +</li>
+					<!-- <li><a href="/designers">small towns</a> +</li> -->
+					<li>=</li>					
 			    </ul>
 		    </nav>
 		</div>
@@ -52,9 +53,11 @@
 	
 	{% block footer %}	
 	<footer >
-		<section class="container12">
+		<section class="container_12">
 			<div class="grid_12">
 				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
 					<li>
 						<a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">
 							license
@@ -62,15 +65,16 @@
 								src="http://i.creativecommons.org/l/by/3.0/88x31.png" /> -->
 						</a>						
 					</li>
+					<li><a href="https://bitbucket.org/hubology" target="_blank">Bitbucket</a></li>
+					<li><a href="https://github.com" target="_blank">github</a></li>					
+
 					<li><a href="/map">map</a></li>					
 					<li><a href="/people">people</a></li>					
 					<li><a href="/projects">projects</a></li>					
-					<li><a href="https://github.com">github</a></li>					
-					<li><a href="https://bitbucket.org/hubology">Bitbucket</a></li>
-					<li><a href="https://www.facebook.com/pages/Hub-ology/170760142994999">Facebook</a></li>
-					<li><a href="https://twitter.com/#!/hubology">Twitter</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/">Home</a></li>					
+
+					<li><a href="https://twitter.com/#!/hubology" target="_blank">Twitter</a></li>
+					<li><a href="https://www.facebook.com/pages/Hub-ology/170760142994999" target="_blank">Facebook</a></li>
+					
 				</ul>
 			</div>						
 		</section>

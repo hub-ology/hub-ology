@@ -1,7 +1,52 @@
 {% extends "subpage.html" %}
 
+{% block header %}
+<div id="container" class="container_12 clearfix">						
+	<div id="intro" class="grid_12 intro">
+		<h1><a href="/">hub-ology</a> promotes big tech in small towns</h1>
+	</div>
+</div>
+{% endblock %}
+
 {% block content %}
-
-ABOUT!
-
+<div id="container" class="container_12">
+  <div id="nav">
+	<div class="grid_7">
+		<a href="/about-logo"><img src="static/logo-mid-size.png" alt="hub-ology logo"></a>
+	</div>
+	<div class="grid_5 about">
+		<p>
+			The primary goal of the hub-ology movement is to get people in rural areas excited about 
+			computer science.  It attempts to do this by focusing on three things:
+			<a href="/inspire">Inspire</a>, <a href="/educate">Educate</a>, and <a href="/do">Do</a>.
+		</p>
+		<br>
+		<p>
+			By arming people with skills learned from computer science, we hope to create 
+			new economic opportunities for people living in small towns.  We also hope that 
+			some of these people will give back by <strong>doing</strong> something great 
+			in their small town.  If you're passionate about education, you can help out 
+			by volunteering to work with local educators to weave computer science into 
+			their existing course work. If you're an entrepreneur, you could start your next
+			tech company in a small town that could really use the jobs.
+		</p>
+		<br>
+		<p>
+			We know the world faces many complex problems.
+			We're confident that the hub-ology movement will produce
+			new groups of deep thinking problem solvers that will tackle the biggest
+			of problems from the smallest of towns for the benefit of all.
+		</p>
+	</div>
+	<div class="clear"></div>
+	<div class="grid_6 prefix_1 about">
+		<br>
+		<p>
+			Our logo isn't just a random image.  It's based on data from some small towns
+			and generated with open source tools.  
+			Click on the <a href="/about-logo">logo</a> to learn more about it.
+		</p>
+	</div>
+  </div>		
+</div>
 {% endblock %}

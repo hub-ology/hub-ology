@@ -40,9 +40,10 @@ def index():
 
 #Import other views
 import hubology.views.about
+import hubology.views.aboutlogo
 import hubology.views.educators
 import hubology.views.mentors
-import hubology.views.technologists
+import hubology.views.developers
 import hubology.views.inspire
 import hubology.views.educate
 import hubology.views.do

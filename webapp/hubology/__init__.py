@@ -9,6 +9,12 @@ def create_app():
     
 app = create_app()
 
+
+#Setup 404 handler
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 def templated(template=None):
     def decorator(f):
         @wraps(f)

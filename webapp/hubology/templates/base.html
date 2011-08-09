@@ -1,9 +1,20 @@
 <!doctype html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"
+	xmlns="http://www.w3.org/1999/xhtml"
+	      xmlns:og="http://ogp.me/ns#"
+	      xmlns:fb="https://www.facebook.com/2008/fbml"> <!--<![endif]-->
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,6 +24,18 @@
 	{% endblock %}
 	<meta name="description" content="hub-ology promotes big tech in small towns">
 	<meta name="author" content="hub-ology">
+	
+	<meta property="og:title" content="hub-ology: big tech, small towns"/>
+	<meta property="og:type" content="cause"/>
+	<meta property="og:url" content="http://hub-ology.org"/>
+	<meta property="og:image" content="http://hub-ology.org/static/hub-ology-logo-small.png"/>
+	<meta property="og:site_name" content="hub-ology"/>
+	<meta property="fb:admins" content="corbinbs"/>
+	<meta property="og:description"
+	          content="hub-ology promotes big tech in small towns.
+					   We hope to inspire new ideas, new technology, new computer scientists,
+					   and new companies in small towns."/>	
+	
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -60,21 +83,32 @@
 					<li><a href="/">Home</a></li>
 					<li><a href="/about">About</a></li>
 					<li><a href="/map">map</a></li>					
-					<li><a href="/people">people</a></li>					
+					<!-- <li><a href="/people">people</a></li>					 -->
 					<li><a href="/projects">projects</a></li>					
 
 					<li><a href="https://bitbucket.org/hubology" target="_blank">Bitbucket</a></li>
 					<li><a href="https://github.com" target="_blank">github</a></li>
 					<li><a href="https://twitter.com/#!/hubology" target="_blank">Twitter</a></li>
-					<li><a href="https://www.facebook.com/pages/Hub-ology/170760142994999" target="_blank">Facebook</a>
+					<li><a href="https://www.facebook.com/pages/hub-ology/170760142994999" target="_blank">Facebook</a>
 					</li>
 					<li>
 						<a rel="license" href="http://creativecommons.org/licenses/by/3.0/" target="_blank">
 							license
-						   <!-- <img alt="Creative Commons License"
-								src="http://i.creativecommons.org/l/by/3.0/88x31.png" /> -->
 						</a>						
-					</li>					
+					</li>
+				</ul>
+				<ul>	
+					<li>
+						<a href="http://twitter.com/share" 
+						  class="twitter-share-button" data-url="http://hub-ology.org" 
+						  data-text="hub-ology: big tech, small towns" data-count="horizontal" 
+						   data-via="hubology">Tweet</a>
+						<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>						
+					</li>
+
+					<li>
+<iframe src="http://www.facebook.com/plugins/like.php?app_id=244367082261380&amp;href=https%3A%2F%2Fwww.facebook.com%2Fpages%2Fhub-ology%2F170760142994999&amp;send=false&amp;layout=button_count&amp;width=200&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>						
+					</li>				
 				</ul>
 			</div>						
 		</section>

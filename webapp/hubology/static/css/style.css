@@ -210,6 +210,10 @@ h1 {font-size:40px;}
 h2 {font-size:30px;}
 h3 {font-size:20px;}
 
+#nav {
+    margin: 10px 0px 0px 0px;
+}
+
 #nav header {
 	float: left;
 	z-index: 3;

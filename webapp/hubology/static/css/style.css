@@ -251,6 +251,22 @@ footer li a {
     padding: 34px 0px 0px 0px;
 }
 
+#twitter input:not(:focus){
+	opacity:0.6;
+}
+
+#twitter  input:required{
+}
+
+#twitter  input:valid {
+	opacity:0.8;
+}		
+
+#twitter input:focus:invalid{
+	border:1px solid red;
+	background-color:#FFEFF0;
+}
+
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .hidden { display: none; visibility: hidden; }

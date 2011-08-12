@@ -9,6 +9,8 @@ def create_app():
     
 app = create_app()
 
+#load up some configuration settings
+app.config.from_object('hubology.default_settings')
 
 #Setup 404 handler
 @app.errorhandler(404)
@@ -54,4 +56,5 @@ import hubology.views.designers
 import hubology.views.inspire
 import hubology.views.educate
 import hubology.views.do
+import hubology.views.sign_in
 

@@ -10,7 +10,7 @@ def create_app():
 app = create_app()
 
 #load up some configuration settings
-app.config.from_object('hubology.default_settings')
+app.config.from_object('hubology.settings')
 
 #Setup 404 handler
 @app.errorhandler(404)

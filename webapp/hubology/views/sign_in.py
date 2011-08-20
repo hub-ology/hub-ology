@@ -6,6 +6,7 @@ from flask import url_for
 from flask import request
 from flaskext.oauth import OAuth
 import uuid
+import logging
 
 @app.route('/sign-in')
 @templated('sign-in.html')
@@ -28,12 +29,7 @@ twitter = oauth.remote_app('twitter',
         
 @twitter.tokengetter
 def get_twitter_token():
-    print session.get('twitter_token')
     return session.get('twitter_token')
-    
-@app.route('/twitter-authorized')
-def twitter_authorized():
-    pass
     
 @app.route('/twitter-login', methods=['POST'])
 def twitter_login():
@@ -53,8 +49,7 @@ def twitter_authorized(resp):
         resp['oauth_token_secret']
     )
     session['twitter_user'] = resp['screen_name']
-
-    print resp
-    print 'You were signed in as %s' % resp['screen_name']
+    
+    logging.info('You were signed in as %s' % resp['screen_name'])
     return redirect(next_url)
     

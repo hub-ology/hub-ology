@@ -21,7 +21,8 @@ except NameError:
     from sets import ImmutableSet as frozenset
 
 # capture these to bypass sandboxing
-from os import utime, rename, unlink, mkdir
+# from os import utime, rename, unlink, mkdir
+from os import utime, rename, unlink
 from os import open as os_open
 from os.path import isdir, split
 
@@ -30,7 +31,7 @@ def _bypass_ensure_directory(name, mode=0777):
     dirname, filename = split(name)
     if dirname and filename and not isdir(dirname):
         _bypass_ensure_directory(dirname)
-        mkdir(dirname, mode)
+        # mkdir(dirname, mode)
 
 
 

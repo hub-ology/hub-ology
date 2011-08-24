@@ -59,38 +59,55 @@ def calculate_distances(towns, hub_town=None):
                         record_distance = False
                 if record_distance:    
                     dist_info[end_town['name']] = distance.distance(start_town['latlng'], end_town['latlng']).miles
-        start_town['distances'] = dist_info
+        if start_town.get('distances') is None:
+            start_town['distances'] = dist_info
+        else:
+            start_town['distances'].update(dist_info)
 
 def main(census_file):
     #exclude some towns to get output that's less cluttered.
-    #no offense to any of these towns...it's not personal -- just avoiding a lot of overlap
+    #no offense to any of these towns -- just avoiding a lot of overlap
+    #any of these towns would make good hubs for hub-ology
     exclusions = ('Greer, South Carolina', 'Roebuck, South Carolina', 
                   'Central Pacolet, South Carolina', 'Southern Shops, South Carolina', 
-                  'Lyman, South Carolina', 'Inman Mills, South Carolina', 
+                  'Inman Mills, South Carolina', 'Fingerville, South Carolina',
                   'Boiling Springs, South Carolina', 'Valley Falls, South Carolina', 
-                  'Fairforest, South Carolina', 'Arcadia, South Carolina', 
-                  'Wellford, South Carolina', 'Saxon, South Carolina')
+                  'Fairforest, South Carolina', 'Arcadia, South Carolina', 'Cross Anchor, South Carolina',
+                  'Wellford, South Carolina', 'Duncan, South Carolina', 'Saxon, South Carolina',
+                  'Converse, South Carolina')
     
     towns = clean_town_data(load_census_data(census_file))
-    calculate_distances(towns, towns[-5])
-    #calculate_distances(towns)
         
+    #Select some of the towns to be 'hubs'
+    hubs = [-5, -4, 13, 2, -1, -11]
+    hub_names = [towns[hub]['name'] for hub in hubs]
+    
+    for hub in hubs:
+        calculate_distances(towns, towns[hub])
+                        
     miles_graph = networkx.Graph()
     miles_graph.position = {}
     miles_graph.population = {}
     
     for town in towns:
-        #print town
-        if town['name'] not in exclusions:            
+        # print town['name']
+        if town['name'] not in exclusions:
             miles_graph.add_node(town['name'])
             miles_graph.position[town['name']] = (town['latlng'][1], town['latlng'][0])
             miles_graph.population[town['name']] = town['population']
             for end_town, miles in town['distances'].items():
-                miles_graph.add_edge(town['name'], end_town, weight=int(miles))
+                #A hack to get rid of a line...
+                if not (town['name'].startswith('Cowpens') and end_town.startswith('Glendale')):
+                    # print "%s -> %s : %r" % (town['name'], end_town, miles)
+                    if (2.9 < miles < 6.7 \
+                      or (town['name'] in hub_names and end_town == hub_names[0])) \
+                      and end_town not in exclusions:
+                        miles_graph.add_edge(town['name'], end_town, weight=int(miles))
         
-    old_glory = ListedColormap([ColorConverter().to_rgb('#FFFFFF'), 
-                                ColorConverter().to_rgb('#0052A5'),
-                                ColorConverter().to_rgb('#E0162B')], name='Old Glory')        
+    old_glory = ListedColormap([ColorConverter().to_rgb('#FFFFFF'),
+                                ColorConverter().to_rgb('#E0162B'),
+                                ColorConverter().to_rgb('#E0162B'),
+                                ColorConverter().to_rgb('#0052A5')], name='Old Glory')        
 
     orange_hex = '#FF6600'
     blaze_orange = ListedColormap([ColorConverter().to_rgb(orange_hex)], name='Blaze Orange')
@@ -101,7 +118,7 @@ def main(census_file):
                 node_size=[miles_graph.population[v] for v in miles_graph],
                 node_color=range(len(miles_graph)),
                 cmap=old_glory,
-                with_labels=False, width=2)
+                with_labels=False, width=3)
 
     #Save the graph in png and svg formats
     pyplot.savefig("logo.png", dpi=300, transparent=True)    
@@ -114,7 +131,7 @@ def main(census_file):
                 node_size=[miles_graph.population[v] for v in miles_graph],
                 node_color=range(len(miles_graph)),
                 cmap=blaze_orange, 
-                with_labels=False, width=2, edge_color=orange_hex)
+                with_labels=False, width=3, edge_color=orange_hex)
 
     #Save the graph in png and svg formats
     pyplot.savefig("orange_logo.png", dpi=300, transparent=True)    

@@ -1,76 +1,64 @@
 {% extends "subpage.html" %}
 
 {% block header %}
-<div id="container" class="container_12">
-  <div id="nav">
-	<div class="grid_2">
-	    <header>
-		  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
-	    </header>
+<div id="header" class="row">
+	<div class="span4 columns">
+	  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
 	</div>
-	<div class="grid_10">
-	    <nav>
-			<ul>
-				<li>other</li>
-				<li>each</li>
-				<li>with</li>
-				<li><a href="/developers">developers</a></li>
-				<li>connects</li>
-				<li><a class="red_link" href="/">hub-ology</a></li>
-		    </ul>
-			<ul>
-				<li><a href="/mentors">mentors</a>]</li>				
-				<li><a href="/designers">designers</a></li>
-				<li>[<a href="/educators">educators</a></li>
-			</ul>		
-	    </nav>
-	</div>
-  </div>		
+	<div id="menu-detail" class="span12 columns">
+		<p>
+		<a class="red_link" href="/">hub-ology</a> connects <a href="/developers">developers</a>
+		with each other
+		<br>
+		[
+		<a href="/educators">educators</a>
+		<a href="/designers">designers</a>		
+		<a href="/mentors">mentors</a>
+		]
+		</p>
+  	</div>		
 </div>
 {% endblock %}
 
 {% block content %}
 
-<div id="main" role="main">
-	<div id="container" class="container_12 clearfix">						
-		<div class="grid_12 intro">
+	<div class="row">
+		<div class="span16 columns intro">
 			<h1><a href="/developers">software developers</a> live in rural areas, too</h1>
 			<h3>Connect with peers in your area and make something great!</h3>
 		</div>
-
-		<div class="grid_3 clearfix">
+	</div>
+	<div class="row">
+		<div class="span3 columns">
 			<div class="thought_circle">
 				<h2><a href="#">Connect</a></h2>
 				<p>Get together and talk tech! Start a user group, share and inspire ideas.
 				</p>
 			</div>
 		</div>
-		<div class="grid_1 bottom_aligned">
-			<div class="small_blue_thought_circle">
-			</div>
+		<div class="span2 columns bottom_aligned">
+			<div class="small_blue_thought_circle"></div>
 		</div>		
-
-		<div class="grid_3">
+		<div class="span3 columns">
 			<div class="thought_circle">
 				<h2><a href="#">Volunteer</a></h2>
 				<p>Work with educators in your area to introduce students to computer science.</p>
 			</div>
 		</div>
-		<div class="grid_1 bottom_aligned">
+		<div class="span2 columns bottom_aligned">
 			<div class="small_blue_thought_circle">
 			</div>
 		</div>		
-
-		<div class="grid_3">
+		<div class="span3 columns">
 			<div class="thought_circle">
 				<h2><a href="#">Lead</a></h2>
 				<p>Turn your idea into a business. Create jobs.  Give back to the community.</p>
 			</div>
 		</div>
+	</div>
 
-		<div class="clear"></div>
-		
-		<div class="grid_9 prefix_1 page_detail">
+	<div class="row">
+		<div class="span14 columns page_detail">
 			<p>
 				Love your small town but want to do something big? hub-ology wants to help you
 				collaborate with other developers in your area.  Feeling entrepreneurial? 
@@ -78,14 +66,13 @@
 				with computer science?  Work with an <a href="/educators">educator</a> in your area and help them weave 
 				computer science into their existing course work.  Need some UI polish for your latest
 				creation?  <a href="/designers">Designers</a> are here, too.
-				
+			
 			</p>
 			<p>
 				<br>
 				Ready to dominate some code? <a href="">Sign up</a> to be a hub-ology developer.
 			</p>
 		</div>
-		
 	</div>
-</div>
+	
 {% endblock %}

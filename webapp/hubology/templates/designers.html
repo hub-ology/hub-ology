@@ -1,82 +1,69 @@
 {% extends "subpage.html" %}
 
 {% block header %}
-<div id="container" class="container_12">
-  <div id="nav">
-	<div class="grid_2">
-	    <header>
-		  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
-	    </header>
+<div id="header" class="row">
+	<div class="span4 columns">
+	  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
 	</div>
-	<div class="grid_10">
-	    <nav>
-			<ul>
-				<li><a href="/developers">developers</a></li>
-				<li>with</li>
-				<li><a href="/designers">designers</a></li>
-				<li>connects</li>
-				<li><a class="red_link" href="/">hub-ology</a></li>
-		    </ul>
-			<ul>
-				<li><a href="/mentors">mentors</a>]</li>				
-				<li>[<a href="/educators">educators</a></li>
-			</ul>		
-	    </nav>
-	</div>
-  </div>		
+	<div id="menu-detail" class="span12 columns">
+		<p>
+		<a class="red_link" href="/">hub-ology</a> connects 
+		<a href="/designers">designers</a> with <a href="/developers">developers</a>
+		<br>
+		[
+		<a href="/educators">educators</a>
+		<a href="/mentors">mentors</a>
+		]
+		</p>
+  	</div>		
 </div>
 {% endblock %}
 
 {% block content %}
 
-<div id="main" role="main">
-	<div id="container" class="container_12 clearfix">						
-		<div class="grid_12 intro">
-			<h1><a href="/designers">designers</a> make it attractive and useable</h1>
-			<h3><a href="/developers">software developers</a> need <a href="/designers">designers</a>
-				to make world-class products</h3>
+<div class="row">
+	<div class="span16 columns intro">
+		<h1><a href="/designers">designers</a> make it attractive and useable</h1>
+		<h3><a href="/developers">software developers</a> need <a href="/designers">designers</a>
+			to make world-class products</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="span3 columns">
+		<div class="thought_circle">
+			<h2><a href="#">UI</a></h2>
+			<p>People are drawn to applications with the best <a href="http://en.wikipedia.org/wiki/User_interface" target="_blank">User Interfaces</a>.  Help rural <a href="/developers">developers</a> make their UI rock.</p>
 		</div>
+	</div>
+	<div class="span2 columns bottom_aligned">
+		<div class="small_blue_thought_circle"></div>
+	</div>		
+	<div class="span3 columns">
+		<div class="thought_circle">
+			<h2><a href="#">Graphics</a></h2>
+			<p>Help applications stand out by providing super cool graphics</p>
+		</div>
+	</div>
+	<div class="span2 columns bottom_aligned">
+		<div class="small_blue_thought_circle">
+		</div>
+	</div>		
+	<div class="span3 columns">
+		<div class="thought_circle">
+			<h2><a href="#">Swagger</a></h2>
+			<p>Tough to describe. You know it when you see it.  Help a small town business get swagger</p>
+		</div>
+	</div>
+</div>
 
-		<div class="grid_3 clearfix">
-			<div class="thought_circle">
-				<h2><a href="#">UI</a></h2>
-				<p>People are drawn to applications with the best <a href="http://en.wikipedia.org/wiki/User_interface" target="_blank">User Interfaces</a>.  Help rural <a href="/developers">developers</a> make their UI rock.</p>
-			</div>
-		</div>
-		<div class="grid_1 bottom_aligned">
-			<div class="small_blue_thought_circle">
-			</div>
-		</div>		
-
-		<div class="grid_3">
-			<div class="thought_circle">
-				<h2><a href="#">Graphics</a></h2>
-				<p>Help applications stand out by providing super cool graphics</p>
-			</div>
-		</div>
-		<div class="grid_1 bottom_aligned">
-			<div class="small_blue_thought_circle">
-			</div>
-		</div>		
-
-		<div class="grid_3">
-			<div class="thought_circle">
-				<h2><a href="#">Swagger</a></h2>
-				<p>Tough to describe. You know it when you see it.  Help a small town business get swagger</p>
-			</div>
-		</div>
-
-		<div class="clear"></div>
-		
-		<div class="grid_9 prefix_1 page_detail">
-			<p>[INSERT SOME COOL COPY]
-			</p>
-			<p>
-				<br>
-				Ready to make it shine? <a href="">Sign up</a> to be a hub-ology designer.
-			</p>
-		</div>
-		
+<div class="row">
+	<div class="span14 columns page_detail">
+		<p>[INSERT SOME COOL COPY]
+		</p>
+		<p>
+			<br>
+			Ready to make it shine? <a href="">Sign up</a> to be a hub-ology designer.
+		</p>
 	</div>
 </div>
 {% endblock %}

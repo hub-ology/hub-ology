@@ -1,23 +1,22 @@
-{% extends "subpage.html" %}
+{% extends "base.html" %}
 
 {% block header %}
-<div id="container" class="container_12 clearfix">						
-	<div id="intro" class="grid_12 intro">
+<div id="nav" class="row">						
+	<div id="intro" class="span16 columns intro">
 		<h1><a href="/">hub-ology</a> promotes big tech in small towns</h1>
 	</div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div id="container" class="container_12">
-  <div id="nav">
-	<div class="grid_7">
-		<a href="/about-logo"><img src="static/logo-mid-size.png" alt="hub-ology logo"></a>
-	</div>
-	<div class="grid_5 about">
+<div class="row">
+	<div class="span8 columns">
+		<a href="/about-logo"><img src="static/hub-ology-logo-mid-size.png" alt="hub-ology logo"></a>
+	</div>	
+	<div class="span7 columns about">
 		<p>
-			The primary goal of the hub-ology movement is to get people in rural areas excited about 
-			computer science.  It attempts to do this by focusing on three things:
+			The primary goal of the hub-ology movement is to get good problem solvers living in 
+			rural areas excited about computers.  It attempts to do this by focusing on three things:
 			<a href="/inspire">Inspire</a>, <a href="/educate">Educate</a>, and <a href="/do">Do</a>.
 		</p>
 		<br>
@@ -37,16 +36,16 @@
 			new groups of deep thinking problem solvers that will tackle the biggest
 			of problems from the smallest of towns for the benefit of all.
 		</p>
-	</div>
-	<div class="clear"></div>
-	<div class="grid_6 prefix_1 about">
+	</div>			
+</div>
+<div class="row">
+	<div class="span6 columns offset1 about">
 		<br>
 		<p>
-			Our logo isn't just a random image.  It's based on data from some small towns
+			Our logo isn't just a random image.  It's inspired by data from some small towns
 			and generated with open source tools.  
 			Click on the <a href="/about-logo">logo</a> to learn more about it.
-		</p>
+		</p>		
 	</div>
-  </div>		
 </div>
 {% endblock %}

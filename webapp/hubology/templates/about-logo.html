@@ -1,46 +1,55 @@
-{% extends "subpage.html" %}
+{% extends "base.html" %}
 
 {% block header %}
-<div id="container" class="container_12 clearfix">						
-	<div id="intro" class="grid_12 intro">
-		<h1>The <a href="/">hub-ology</a> logo comes from small towns</h1>
+<div id="nav" class="row">						
+	<div id="intro" class="span16 columns intro">		
+		<h1>The <a href="/">hub-ology</a> logo comes from small towns</h1>		
 	</div>
 </div>
 {% endblock %}
 
 {% block content %}
-<div id="container" class="container_12">
-  <div id="nav">
-	<div class="grid_5 about">
+<div class="row">
+	<div class="span6 columns about">
 		<iframe width="400" height="450" frameborder="0" scrolling="no"
 				marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Spartanburg,+SC&amp;aq=0&amp;sll=37.0625,-95.677068&amp;sspn=52.240038,63.369141&amp;ie=UTF8&amp;hq=&amp;hnear=Spartanburg,+South+Carolina&amp;ll=34.964748,-81.899643&amp;spn=0.253219,0.273972&amp;z=11&amp;iwloc=&amp;output=embed">
 		</iframe>
 	</div>
-	<div class="grid_7">
-	  <a href="/about-logo"><img src="static/logo-mid-size.png" alt="hub-ology logo"></a>
+	<div class="span10 columns">
+		<img src="static/hub-ology-graph.png" alt="hub-ology graph">
 	</div>
-	<div class="clear"></div>
-	<div class="grid_11">
-		<br>
+</div>
+<div class="row">
+	<div class="span2 columns">
+		<img src="static/hub-ology-logo-small.png" alt="hub-ology logo">
+	</div>
+	<div class="span11 columns">
 		<p>
 			The hub-ology logo is based on
 			<a href="http://2010.census.gov/2010census/data/" target="_blank">2010 census data</a>
 			for towns in Spartanburg County, SC.
-			Each circle (<a href="http://en.wikipedia.org/wiki/Vertex_(graph_theory)" target="_blank">node</a>)
-			in the logo (<a href="http://en.wikipedia.org/wiki/Graph_(mathematics)" target="_blank">graph</a>)
-			represents the population of a town in the data set.
+			The size of each circle (<a href="http://en.wikipedia.org/wiki/Vertex_(graph_theory)" target="_blank">node</a>)
+			in the <a href="http://en.wikipedia.org/wiki/Graph_(mathematics)" target="_blank">graph</a>
+			represents the population of a town in that data set.
 			The lines (<a href="http://en.wikipedia.org/wiki/Edge_(graph_theory)" target="_blank">edges</a>)
-			connecting the circles are based on the distance (in miles) from the center circle
-			(the city of Spartanburg).  The colors for the circles come from the
+			connecting the circles are based on the distance (in miles) between two towns.
+			The colors for the circles come from the
 			<a href="http://www.colourlovers.com/palette/3263/American_Flag" target="_blank">American Flag</a>.
-			Inspired by <a href="http://en.wikipedia.org/wiki/Daniel_Morgan" target="_blank">Daniel Morgan</a>
-			and <a href="http://en.wikipedia.org/wiki/Daniel_Morgan#The_Battle_of_Cowpens" target="_blank">
-			The Battle of Cowpens</a>, hub-ology hopes to help create many new important moments that originate in 
-			small towns.
 		</p>
-		<br>
+	</div>
+</div>
+<div class="row">
+	<div class="span14 columns">
 		<p>
-			The logo was created using the <a href="http://python.org" target="_blank">Python</a>
+			The hub-ology logo is composed of five circles (or towns from the hub-ology graph).
+			The blue circles each represent a developer, designer, educator, and a mentor.
+			The red circle in the center represents a great problem solver in a small town that 
+			could benefit by doing more with computers.  By surrounding that good problem solver
+			with support and inspiration from the blue circles, we hope that they'll enhance their 
+			talents with computing.  The logo also represents an "H" for hub-ology.
+		</p>
+		<p>
+			The graph was created using the <a href="http://python.org" target="_blank">Python</a>
 			Programming Language and a collection of really useful modules.	
 			<a href="http://networkx.lanl.gov/" target="_blank">networkx</a> was used to construct
 			the graph based on the census data.  
@@ -50,15 +59,14 @@
 		</p>
 		<br>		
 		<p>
-			The source code for the logo maker can be found below:
+			The source code used to generate the graph can be found below:
 		</p>
 		<br>
 	</div>
-	<div class="clear"></div>
-	<div class="grid_11">
+</div>
+<div class="row">
+	<div class="span14 columns">
 		<script src="https://bitbucket.org/hubology/hub-ology/src/b43956353414/misc/logo_maker.py?embed=t"></script>
 	</div>
-	
-  </div>
 </div>
 {% endblock %}

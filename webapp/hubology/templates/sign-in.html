@@ -1,42 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div id="main" role="main">
-	<div id="container" class="container_12 clearfix">						
-		<div id="intro" class="grid_12 intro">
-			<h3>Sign Up or Sign In
-			</h3>
-		</div>
-
-		<div class="grid_12 clearfix">
-
-			<form action="/twitter-login" method="post">
-			   <!-- <div id='name' class='outerDiv'>
-				<label for="name">Full name:</label>
-				<input type="text" name="name" required  />
-				<div class='message' id='nameDiv'> Enter your first and last name. </div>
-			   </div> -->
-			   <!-- <div id='username' class='outerDiv'>
-				<label for="number">Username:</label>
-				<input type="text" name="username" required  />
-				<div class='message' id='usernameDiv'> Pick a unique name on Twitter. </div>
-			   </div>
-			   <div id='password' class='outerDiv'>
-				<label for="password">Password:</label>
-				<input type="password" name="password" required />
-				<div class='message' id='websiteDiv'>6 characters or more (be tricky!).</div>
-			   </div> -->
-			   <!-- <div id='email' class='outerDiv'>
-				<label for="email">Email:</label>
-				<input type="email" name="email" required />
-				<div class='message' id='emailDiv'> We'll send you a confirmation.</div>
-			   </div> -->
-			   <div id='submit' class='outerDiv'>
-			        <input type="submit" value="Login with Twitter" />
-			   </div>
-			 </form>
-						
-		</div>		
+<div class="row">
+	<div id="intro" class="span12 columns intro">
+		<h3>Sign In with you favorite account
+		</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="span4 columns">
+		<form action="/twitter-login" method="post">
+		   <div id='submit'>
+		        <input type="submit" class="btn" value="Login with Twitter" />
+		   </div>
+		 </form>
+	</div>
+	<div class="span4 columns">
+		<form action="/facebook-login" method="post">
+		   <div id='submit'>
+		        <input type="submit" class="btn" value="Login with Facebook" />
+		   </div>
+		 </form>
+	</div>
+	<div class="span4 columns">
+		<form action="/linkedin-login" method="post">
+		   <div id='submit'>
+		        <input type="submit" class="btn" value="Login with LinkedIn" />
+		   </div>
+		 </form>
 	</div>
 </div>
 {% endblock %}

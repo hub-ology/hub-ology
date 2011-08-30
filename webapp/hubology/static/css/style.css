@@ -40,7 +40,7 @@ body { font:13px/1.231 sans-serif; *font-size:small; }
 select, input, textarea, button { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
-html { overflow-y: scroll; }
+html { overflow-y: scroll;   background-color: #F1F1F1;  }
 a:hover, a:active { outline: none; }
 ul, ol { margin-left: 2em; }
 ol { list-style-type: decimal; }
@@ -174,7 +174,7 @@ div.small_blue_thought_circle {
 
 .thought_circle p { 
     text-align: center;
-    padding: 1em 1em 1em 1em;
+    padding: 0.5em 1em 1em 1em;
 }
 .thought_circle h2 {
     text-align: center;
@@ -222,11 +222,11 @@ h3 {font-size:20px;}
 }
 
 #footer {
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 #footer a {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 30px;
     text-transform:uppercase;
     font-size:12px;
 }

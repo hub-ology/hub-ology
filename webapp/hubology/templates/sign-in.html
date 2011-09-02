@@ -1,31 +1,41 @@
 {% extends "base.html" %}
+{% block header %}
+<div id="header" class="row">
+	<div class="span2 columns">
+	  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
+	</div>
+	<div class="span12 columns intro">
+		<h1><a href="/">hub-ology</a></h1>
+  	</div>		
+</div>
+{% endblock %}
 
 {% block content %}
 <div class="row">
 	<div id="intro" class="span12 columns intro">
-		<h3>Sign In with you favorite account
+		<h3>Sign In with your favorite account
 		</h3>
 	</div>
 </div>
 <div class="row">
-	<div class="span4 columns">
+	<div class="span4 columns offset2">
 		<form action="/twitter-login" method="post">
 		   <div id='submit'>
-		        <input type="submit" class="btn" value="Login with Twitter" />
+		        <input type="submit" class="btn" value="Twitter" />
 		   </div>
 		 </form>
 	</div>
 	<div class="span4 columns">
 		<form action="/facebook-login" method="post">
 		   <div id='submit'>
-		        <input type="submit" class="btn" value="Login with Facebook" />
+		        <input type="submit" class="btn" value="Facebook" />
 		   </div>
 		 </form>
 	</div>
 	<div class="span4 columns">
 		<form action="/linkedin-login" method="post">
 		   <div id='submit'>
-		        <input type="submit" class="btn" value="Login with LinkedIn" />
+		        <input type="submit" class="btn" value="LinkedIn" />
 		   </div>
 		 </form>
 	</div>

@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request, jsonify
 from flask import render_template, current_app
 from functools import wraps
-
+import logging
 
 def create_app():
     return Flask(__name__)
@@ -16,6 +16,11 @@ app.config.from_object('hubology.settings')
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+    
+#Setup 500 handler
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
 
 def templated(template=None):
     def decorator(f):

@@ -1,43 +1,67 @@
 {% extends "base.html" %}
 {% block header %}
 <div id="header" class="row">
-	<div class="span2 columns">
-	  <a href="/"><img src="static/hub-ology-logo-small.png" alt="hub-ology logo"></a>
-	</div>
-	<div class="span12 columns intro">
-		<h1><a href="/">hub-ology</a></h1>
+	<div class="span9 columns intro">
+		<h1 id="huge"><a href="/">hub-ology</a></h1>
   	</div>		
+	<div class="span3 columns intro sign-in-links">
+		<h2><a href="/developers">developers</a></h2>
+		<h2><a href="/educators">educators</a></h2>
+	</div>
+	<div class="span3 columns intro sign-in-links">
+		<h2><a href="/mentors">mentors</a></h2>
+		<h2><a href="/designers">designers</a></h2>
+  	</div>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="row">
-	<div id="intro" class="span12 columns intro">
-		<h3>Sign In with your favorite account
-		</h3>
+	<div class="span8 columns">
+		<a href="/"><img src="static/hub-ology-logo-mid-size.png" alt="hub-ology logo"></a>
 	</div>
-</div>
-<div class="row">
-	<div class="span4 columns offset2">
-		<form action="/twitter-login" method="post">
-		   <div id='submit'>
-		        <input type="submit" class="btn" value="Twitter" />
-		   </div>
-		 </form>
-	</div>
-	<div class="span4 columns">
-		<form action="/facebook-login" method="post">
-		   <div id='submit'>
-		        <input type="submit" class="btn" value="Facebook" />
-		   </div>
-		 </form>
-	</div>
-	<div class="span4 columns">
-		<form action="/linkedin-login" method="post">
-		   <div id='submit'>
-		        <input type="submit" class="btn" value="LinkedIn" />
-		   </div>
-		 </form>
+	<div class="span8 columns">
+		<div class="row">
+			<div class="span6 columns offset1">
+				<h3>Sign In with your favorite account</h3>		
+			</div>
+		</div>		
+		<div class="row sign-in-button-row">
+			<div class="span2 columns offset1">
+				<a href="http://www.twitter.com" target="_blank"><img src="/static/twitter-bird.png"></a>
+			</div>
+			<div class="span4 columns sign-in-button">
+				<form id="twitter-login" action="/twitter-login" method="post">
+				   <div id='submit'>
+				        <input type="submit" class="btn large" value="Sign In with Twitter" />
+				   </div>
+				 </form>				
+			</div>
+		</div>
+		<div class="row sign-in-button-row">
+			<div class="span2 columns offset1">
+				<a href="http://www.facebook.com" target="_blank"><img src="/static/facebook.png"></a>
+			</div>
+			<div class="span4 columns sign-in-button">
+				<form id="facebook-login" action="/facebook-login" method="post">
+				   <div id='submit'>
+				        <input type="submit" class="btn large" value="Sign In with Facebook" />
+				   </div>
+				 </form>
+			</div>
+		</div>
+		<div class="row sign-in-button-row">
+			<div class="span2 columns offset1">
+				<a href="http://www.linkedin.com" target="_blank"><img src="/static/linkedin.png"></a>
+			</div>
+			<div class="span4 columns sign-in-button">
+				<form id="linkedin-login" action="/linkedin-login" method="post">
+				   <div id='submit'>
+				        <input type="submit" class="btn large" value="Sign In with LinkedIn" />
+				   </div>
+				 </form>
+			</div>			
+		</div>								
 	</div>
 </div>
 {% endblock %}

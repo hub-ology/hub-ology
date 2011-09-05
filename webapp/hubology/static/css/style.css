@@ -203,6 +203,15 @@ h3 {font-size:20px;}
     margin: 40px 0px 0px 0px;    
 }
 
+.sign-in-button-row {
+    height: 100px;
+}
+
+.sign-in-button {
+    float:left;
+    margin: 7px 0px 0px 0px;
+}
+
 #huge a {
     font-size:96px;
 }

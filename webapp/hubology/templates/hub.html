@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="topbar">
+   <div class="topbar-inner">
+     <div class="container">
+       <h3><a href="/hub">hub-ology</a></h3>
+       <ul class="nav">
+         <li class=""><a href="/people">People</a></li>
+         <li class=""><a href="/map">Map</a></li>
+         <li class=""><a href="/projects">Projects</a></li>
+         <li class=""><a href="/lessons">Lessons</a></li>
+	 	 <li class="dropdown">
+	        <a href="#" class="dropdown-toggle">Code</a>
+	        <ul class="dropdown-menu">
+	          <li><a href="https://bitbucket.org/hubology/hub-ology/overview" target="_blank">bitbucket</a></li>
+	          <li><a href="https://github.com/hub-ology/hub-ology" target="_blank">github</a></li>
+	          <li class="divider"></li>
+	          <li><a href="#">Another link</a></li>
+	        </ul>
+		 </li>		
+
+       </ul>
+	   <ul class="nav secondary-nav">
+         <li class="dropdown">
+           <a href="#" class="dropdown-toggle">{{ current_user.name }}</a>
+           <ul class="dropdown-menu">
+             <!-- <li><a href="#">Edit Profile</a></li> -->
+             <li class="divider"></li>
+             <li><a href="/sign-out">Sign Out</a></li>
+           </ul>
+         </li>
+	   </ul>
+     </div>
+   </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="row topbar_content">
+	<div class="span8 columns offset4">
+		<input class="xlarge" id="user_location" name="user_location" size="30" type="text">
+	</div>
+</div>
+
+<div class="row">
+	<div class="span10 columns offset3">
+	   <h1>WOOOOOO.</h1>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+
+});
+</script>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

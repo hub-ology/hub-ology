@@ -1,16 +1,32 @@
 from flask import Flask
 from flask import request, jsonify
 from flask import render_template, current_app
+from flaskext.login import LoginManager
 from functools import wraps
 import logging
+import uuid
+
+from hubology.models import HubUser
 
 def create_app():
     return Flask(__name__)
     
 app = create_app()
+app.secret_key = str(uuid.uuid4())
+
+login_manager = LoginManager()
+
+login_manager.setup_app(app)
+
+@login_manager.user_loader
+def load_user(userid):
+    return HubUser.find(userid)
 
 #load up some configuration settings
 app.config.from_object('hubology.settings')
+
+login_manager.login_view = "/sign-in"
+login_manager.login_message = u"Please sign in to access hub-ology."
 
 #Setup 404 handler
 @app.errorhandler(404)
@@ -62,4 +78,6 @@ import hubology.views.inspire
 import hubology.views.educate
 import hubology.views.do
 import hubology.views.sign_in
+import hubology.views.sign_out
+import hubology.views.hub
 

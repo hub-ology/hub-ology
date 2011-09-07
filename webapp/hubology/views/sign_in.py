@@ -6,11 +6,13 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from flaskext.oauth import OAuth
+from flaskext.login import login_user
 import simplejson as json
-import uuid
 import urllib
 import urllib2
 import logging
+
+from hubology.models import HubUser
 
 @app.route('/sign-in')
 @templated('sign-in.html')
@@ -19,8 +21,6 @@ def sign_in():
 
 #Setup OAuth remote apps
 oauth = OAuth()
-
-app.secret_key = str(uuid.uuid4())
 
 twitter = oauth.remote_app('twitter',
     base_url='http://api.twitter.com/1/',
@@ -40,6 +40,7 @@ linkedin = oauth.remote_app('linkedin',
     consumer_secret=app.config['LINKEDIN_CONSUMER_SECRET']
 )
 
+#This is included here for 
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
     request_token_url='https://graph.facebook.com/oauth/request_token',
@@ -91,23 +92,35 @@ def twitter_authorized(resp):
         resp['oauth_token'],
         resp['oauth_token_secret']
     )
-    session['twitter_screen_name'] = resp['screen_name']
-    session['twitter_user_id'] = resp['user_id']    
-    
-    logging.info('You were signed in as %s' % resp['screen_name'])
+
     #Fetch twitter profile information
     info = twitter.get('users/show.json',
                         data={'user_id':resp['user_id']})
     if info.status == 200:        
-        # logging.info(info.data)
-        logging.info(info.data.get('name'))
-        logging.info(info.data.get('profile_image_url'))        
-        logging.info(info.data.get('location'))
-        logging.info(info.data.get('url'))        
+        hubid = u'twitter-%s' % resp['user_id']
+
+        user = HubUser.find(hubid)
+        if user is None:
+            #This is the first time this twitter user has signed in
+            #to hub-ology.  We'll need to create a new HubUser for them.
+            user = HubUser(socnet=u'twitter', userid=resp['user_id'],
+                           hubid=hubid, name=info.data.get('name'))
+
+            user.profile_image_url = info.data.get('profile_image_url')
+            user.location_name = info.data.get('location')
+            user.url = info.data.get('url')
+            user.username = resp['screen_name']
+            user.link = u'https://twitter.com/#!/%s' % resp['screen_name']
+            
+            #Save the user
+            user.put()
+        
+        login_user(user)
+        #Redirect the user to the 'hub'
+        return redirect(url_for('hub', _external=True))
     else:
         logging.error('Unable to load profile information for twitter user: %s' % session['twitter_user'])
-
-    return redirect(next_url)
+        return redirect(url_for('sign_in', _external=True))
     
 
 @app.route('/linkedin-authorized')
@@ -118,7 +131,6 @@ def linkedin_authorized(resp):
         print u'You denied the request to sign in.'
         return redirect(next_url)
 
-    logging.info(resp)
 
     session['linkedin_token'] = (
         resp['oauth_token'],
@@ -126,24 +138,41 @@ def linkedin_authorized(resp):
     )
 
     #Fetch linkedin profile information
-    info = linkedin.get('v1/people/~', data={})
+    info = linkedin.get('v1/people/~:(id,first-name,last-name,public-profile-url,picture-url)', data={})
     if info.status == 200:        
         xml = info.data
-        logging.info(ElementTree.tostring(xml))
-        logging.info(dir(xml))
-        logging.info(xml.findtext(".//first-name"))
-        logging.info(xml.findtext(".//last-name"))        
+        # logging.info(ElementTree.tostring(xml))
+        linkedin_id = xml.findtext(".//id")
+        name = u'%s %s' % (xml.findtext(".//first-name"), xml.findtext(".//last-name"))
+        link = u'%s' % xml.findtext(".//public-profile-url")
+        profile_image_url = u'%s' % xml.findtext(".//picture-url")                
+        hubid = u'linkedin-%s' % linkedin_id
 
-        # logging.info(info.data.get('location:(name)'))
-        # logging.info(info.data.get('picture-url'))        
+        user = HubUser.find(hubid)
+        if user is None:
+            #This is the first time this LinkedIn user has signed in
+            #to hub-ology.  We'll need to create a new HubUser for them.
+            user = HubUser(socnet=u'linkedin', userid=linkedin_id,
+                           hubid=hubid, name=name)
+
+            user.profile_image_url = profile_image_url
+            user.link = link
+            
+            #Save the user
+            user.put()
+        
+        login_user(user)
+        #Redirect the user to the 'hub'
+        return redirect(url_for('hub', _external=True))
+        
     else:
         logging.error('Unable to load profile information for linkedin user')
-
-    return redirect(next_url)
+        return redirect(next_url)
 
 @app.route('/facebook-authorized')
 @facebook.authorized_handler
 def facebook_authorized(resp):
+    next_url = request.args.get('next') or url_for('index')
     code = request.args.get('code')
     if code in (None, ''):
         #No code, send back to index page
@@ -155,7 +184,6 @@ def facebook_authorized(resp):
                                   'client_secret': app.config['FACEBOOK_SECRET'],
                                   'code':code}))
     data = response.read()
-    logging.info(data)
     params = dict([part.split('=') for part in data.split('&')])
     session['facebook_access_token'] = params['access_token']
     session['facebook_code'] = code
@@ -163,9 +191,28 @@ def facebook_authorized(resp):
     response = urllib2.urlopen("https://graph.facebook.com/me?%s" %
                     urllib.urlencode({'access_token': session['facebook_access_token']}))
     data = response.read()
-    logging.info(data)
     user_info = json.loads(data)
     logging.info(user_info.get('name'))
-    next_url = request.args.get('next') or url_for('index')
+
+    facebook_id = user_info.get('id')
+    hubid = u'facebook-%s' % facebook_id
+
+    user = HubUser.find(hubid)
+    if user is None:
+        #This is the first time this Facebook user has signed in
+        #to hub-ology.  We'll need to create a new HubUser for them.
+        user = HubUser(socnet=u'facebook', userid=facebook_id,
+                       hubid=hubid, name=user_info.get('name'))
+
+        user.username = user_info.get('username')
+        user.profile_image_url = u'https://graph.facebook.com/%s/picture' % user_info.get('username')
+        user.link = user_info.get('link')
+        user.gender = user_info.get('gender')
+        
+        #Save the user
+        user.put()
     
-    return redirect(next_url)    
+    login_user(user)
+    #Redirect the user to the 'hub'
+    return redirect(url_for('hub', _external=True))
+    

@@ -1,0 +1,60 @@
+{% extends 'authenticated-base.html' %}
+
+{% block extrascripts %}
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block map %}
+ <div id="map"></div>
+<script type="text/javascript">
+	$("#map").height($(window).height());
+	$("#map").width($(window).width());	
+		
+	function process_location(position) {
+	    var latitude = position.coords.latitude;
+	    var longitude = position.coords.longitude;
+	    console.log(position);
+		var latlng = new google.maps.LatLng(latitude, longitude);
+		var myOptions = {
+		  zoom: 12,
+		  center: latlng,
+		  panControl: false,
+		  zoomControl: true,
+		  zoomControlOptions: {
+	        style: google.maps.ZoomControlStyle.LARGE,
+	        position: google.maps.ControlPosition.LEFT_CENTER
+		  },	
+		  mapTypeControl: true,
+	   	  mapTypeControlOptions: {
+		    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+		    position: google.maps.ControlPosition.BOTTOM_CENTER
+		  },	
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+	      // Monitor the window resize event and let the map know when it occurs
+	      if (window.attachEvent) { 
+	        window.attachEvent("onresize", function() {
+				$("#map").height($(window).height());
+				$("#map").width($(window).width());	
+			} );
+	      } else {
+	        window.addEventListener("resize", function() {
+				$("#map").height($(window).height());
+				$("#map").width($(window).width());					
+			} , false);
+	      }
+	}
+	
+	get_location(process_location);
+			
+  </script>
+{% endblock %}
+
+

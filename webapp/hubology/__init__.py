@@ -61,12 +61,6 @@ def index():
     #render the main site page
     return dict()
 
-# @app.route('/')
-# @templated('splash-index.html')
-# def index():
-#     #render the main site page
-#     return dict()
-
 #Import other views
 import hubology.views.about
 import hubology.views.aboutlogo
@@ -80,4 +74,5 @@ import hubology.views.do
 import hubology.views.sign_in
 import hubology.views.sign_out
 import hubology.views.hub
+import hubology.views.map
 

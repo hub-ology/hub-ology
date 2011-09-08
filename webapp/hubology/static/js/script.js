@@ -1,19 +1,11 @@
 
-function get_location() {
+function get_location(process_location) {
     if (Modernizr.geolocation) {
         navigator.geolocation.getCurrentPosition(process_location);
     } else {
         //No native location support
         //Let the user choose?
     }
-}
-
-
-function process_location(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    console.log(position);
-    //Save coords? Plot?
 }
 
 // Dropdown example for topbar nav

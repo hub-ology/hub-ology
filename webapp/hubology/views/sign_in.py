@@ -40,7 +40,10 @@ linkedin = oauth.remote_app('linkedin',
     consumer_secret=app.config['LINKEDIN_CONSUMER_SECRET']
 )
 
-#This is included here for 
+#This code was written prior to flask-oauth being updated 
+#to support Facebook.  Need to revisit this and sync with the 
+#new flask-oauth changes.
+#  https://github.com/mitsuhiko/flask-oauth
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
     request_token_url='https://graph.facebook.com/oauth/request_token',

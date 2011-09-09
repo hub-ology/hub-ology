@@ -1,7 +1,7 @@
 
-function get_location(process_location) {
+function get_location(process_location, error_callback) {
     if (Modernizr.geolocation) {
-        navigator.geolocation.getCurrentPosition(process_location);
+        navigator.geolocation.getCurrentPosition(process_location, error_callback);
     } else {
         //No native location support
         //Let the user choose?

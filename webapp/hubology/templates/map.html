@@ -10,10 +10,11 @@
 {% endblock %}
 
 {% block map %}
- <div id="map"></div>
+ <div id="map" style="vertical-align : middle; display : table-cell;"></div>
 <script type="text/javascript">
 	$("#map").height($(window).height());
 	$("#map").width($(window).width());	
+	$("#map").html("<h1 style='>Loading...</h1>");
 		
 	function process_location(position) {
 	    var latitude = position.coords.latitude;
@@ -52,7 +53,28 @@
 	      }
 	}
 	
-	get_location(process_location);
+	get_location(process_location,
+			//the error callback
+			function (error)
+			{
+				switch(error.code) 
+				{
+					case error.TIMEOUT:
+						alert ('Timeout');
+						break;
+					case error.POSITION_UNAVAILABLE:
+						alert ('Position unavailable');
+						break;
+					case error.PERMISSION_DENIED:
+						alert ('Permission denied');
+						break;
+					case error.UNKNOWN_ERROR:
+						alert ('Unknown error');
+						break;
+				}
+				//Default to Spartanburg, SC
+				process_location({'coords':{'latitude': 34.9494444, 'longitude': -81.9322222}})
+			}, {'timeout':5000});
 			
   </script>
 {% endblock %}

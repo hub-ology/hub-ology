@@ -3,23 +3,59 @@
 {% block content %}
 
 <div class="row topbar_content">
-	<div class="span8 columns offset4">
+	<div class="span2 columns offset2">
 		<a href="{{ current_user.link }}" target="_blank"><img src="{{ current_user.profile_image_url }}"></a>
-		<input class="xlarge" id="user_location" name="user_location" size="30" type="text">
 	</div>
+	<div class="span10 columns">
+		<h1>{{ current_user.name }}</h1>
+	</div>	
 </div>
 
 <div class="row">
-	<div class="span10 columns offset3">
-	   <h1>WOOOOOO.</h1>
+	<div class="span12 columns offset2">
+		<h2>Welcome to hub-ology!</h2>
+		<br>
+		<h3>
+			We're glad you're here.  We've got a lot of work to do and we need your help.
+			Our aim is to weave computer science into K12 education and to promote big tech
+			in small towns.  The first step is to bring together key people like yourself.
+			So, be sure to check out your <a href="/profile">profile</a> to ensure we've got the 
+			correct information for you and that you're classified appropriately based on 
+			your skills and experience (developer, educator, designer, mentor).			
+		</h3>		
 	</div>
 </div>
-
-<script>
-$(document).ready(function() {
-
-});
-</script>
+<div class="row">
+	<div class="span12 columns offset2">
+		<h3>What's next?</h3>
+		<br>
+		<h3>Take a look around to see who else is here.  You can browse hub-ology members in the <a href="/people">listing</a>
+			or you can view them on the <a href="/map">map</a>.  Make new friends and start working on projects together.
+		</h3>
+		<br>
+		<h3>If you already have some software development experience, we could use your help to work on 
+			new features for hub-ology.org.  If you're a designer, we could use your help to make sure
+			the site is easy to use and easy on the eyes.  Contact <a href="https://twitter.com/#!/hubology" target="_blank">@hubology</a> 
+			or <a href="https://twitter.com/#!/corbinbs" target="_blank">@corbinbs</a> to get involved with the web site.
+		</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="span12 columns offset2">
+		<h3>
+			Oh and don't forget to spread the word about hub-ology on <a href="https://twitter.com/#!/hubology" target="_blank">twitter</a> and 
+			<a href="https://www.facebook.com/pages/hub-ology/170760142994999" target="_blank">facebook</a>!
+		</h3>
+	</div>
+</div>
+<div class="row">
+	<div class="span12 columns offset2">
+		<h3>Thank you!</h3>
+		<br>
+		<h3>-<a href="https://twitter.com/#!/corbinbs" target="_blank">Brian S. Corbin</a> 
+			and the members of <a href="https://twitter.com/#!/hubology" target="_blank">hub-ology</a></h3>
+	</div>
+</div>
 
 {% endblock %}
 

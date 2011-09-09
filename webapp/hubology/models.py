@@ -46,6 +46,36 @@ class HubUser(db.Model):
         """ 
         return False
         
+    def is_member_type(self, member_type):
+        """ Is this user of the specified member type?
+        """
+        if self.classification is not None:
+            return member_type in self.classification
+        else:
+            return false
+        
+    
+    def is_developer(self):
+        """ Is this user a software developer?
+        """
+        return self.is_member_type(u'developer')
+
+    def is_educator(self):
+        """ Is this user an educator?
+        """
+        return self.is_member_type(u'educator')
+    
+    def is_designer(self):
+        """ Is this user a designer?
+        """
+        return self.is_member_type(u'designer')
+    
+    def is_mentor(self):
+        """ Is this user a mentor?
+        """
+        return self.is_member_type(u'mentor')
+
+        
     def get_id(self):
         return self.hubid
     

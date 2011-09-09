@@ -1,0 +1,217 @@
+{% extends 'authenticated-base.html' %}
+
+{% block extrascripts %}
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+</script>
+<script type="text/javascript">
+
+function process_location(position) {
+	geocoder = new google.maps.Geocoder();
+	var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+	geocoder.geocode({'latLng': latlng}, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK) {
+	        if (results[2]) {
+			  console.log(results[2].formatted_address);
+			  $('#location_name').val(results[2].formatted_address);
+	        }
+	      } else {
+			alert("Geocoder failed due to: " + status);
+	      }
+	});
+}
+
+function use_current_location() {
+	get_location(process_location,
+			//the error callback
+			function (error)
+			{
+				switch(error.code) 
+				{
+					case error.TIMEOUT:
+						alert ('Timeout');
+						break;
+					case error.POSITION_UNAVAILABLE:
+						alert ('Position unavailable');
+						break;
+					case error.PERMISSION_DENIED:
+						alert ('Unable to determine location: Permission denied');
+						break;
+					case error.UNKNOWN_ERROR:
+						alert ('Unknown error');
+						break;
+				}
+				//Default to Spartanburg, SC
+				process_location({'coords':{'latitude': 34.9494444, 'longitude': -81.9322222}})
+			}, {'timeout':5000});
+	
+	
+}		
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="row topbar_content">
+	<div class="span2 columns offset2">
+		<a href="{{ current_user.link }}" target="_blank"><img src="{{ current_user.profile_image_url }}"></a>
+	</div>
+	<div class="span10 columns">
+		<h1>{{ current_user.name }}</h1>
+	</div>	
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+<div class="row">
+	<div class="span10 columns offset2">
+    {% for category, message in messages %}
+		{% if category != 'message' %}
+	    <div class="alert-message {{ category }}">
+	        <a class="close" href="#">×</a>
+	        <p><strong>{{ category|capitalize }}!</strong> {{ message }}</p>
+	    </div>
+		{% endif %}
+    {% endfor %}
+	</div>
+</div>
+  {% endif %}
+{% endwith %}
+
+
+<form action="/profile" class="form-stacked" method="POST">
+<div class="row">
+	<div class="span12 columns offset2">
+        <fieldset>
+          <legend>hub-ology profile</legend>
+          <div class="clearfix">
+            <label for="location_name">Location</label>
+            <div class="input">				
+              <input class="xlarge" id="location_name" name="location_name" size="30" type="text" 
+				{% if current_user.location_name %}
+					value="{{ current_user.location_name }}"
+				{% endif %}
+				>
+			  <a id="use_current_location_btn" class="btn">Use Current Location</a>
+              <span class="help-block">
+				Don't use your home or work address.  Just specify the town where you want to get involved.<br>
+				Example: Clifton, SC
+              </span>	
+			 
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label for="email">Email</label>
+            <div class="input">
+              <input class="xlarge" id="email" name="email" size="30" type="text" 
+				{% if current_user.email %}
+					value="{{ current_user.email }}"
+				{% endif %}
+				>
+              <span class="help-block">
+                By specifying an email address, you're indicating we may contact you directly.<br>
+				Don't worry, we won't give out your email to others without your permission.
+              </span>				
+            </div>
+          </div><!-- /clearfix -->
+          <div class="clearfix">
+            <label id="classification">Member Type</label>
+            <div class="input">
+              <ul class="inputs-list">
+                <li>
+                  <label>
+                    <input type="checkbox" name="classification" value="developer"
+					{% if current_user.is_developer() %}
+						checked
+					{% endif %}
+					>
+                    <span>Software Developer</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="classification" value="educator"
+					{% if current_user.is_educator() %}
+						checked
+					{% endif %}
+					>
+                    <span>Educator</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="classification" value="designer"
+					{% if current_user.is_designer() %}
+						checked
+					{% endif %}
+					>
+                    <span>Designer</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="checkbox" name="classification" value="mentor"
+					{% if current_user.is_mentor() %}
+						checked
+					{% endif %}
+					>
+                    <span>Mentor</span>
+                  </label>
+                </li>
+              </ul>
+              <span class="help-block">
+                <strong>Note:</strong>You may select more than one
+              </span>
+            </div>
+        </fieldset>
+	</div>
+	<div class="row">
+		<div class="span10 columns offset2">
+		    <div class="actions">		
+				<div class="row">
+					<div class="span6 columns">				
+				          <button type="submit" class="btn primary">Save Changes</button>&nbsp;
+					</div>
+					<div class="span3 columns">				
+						<a id="delete_profile_btn" class="btn danger">Delete Profile</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+
+<div class="row">
+	<div class="span8 columns offset4">
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+	
+	$(document).delegate('a.close', 'click', function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		var flashMessage = $this.closest('.alert-message');
+		if ( flashMessage ) {
+			flashMessage.remove();
+		}
+	});
+	
+	
+	$(document).delegate('#use_current_location_btn', 'click', function(e) {
+		e.preventDefault();
+		use_current_location();
+	});
+
+	$(document).delegate('#delete_profile_btn', 'click', function(e) {
+		e.preventDefault();
+		alert("Delete Profile Not Yet Implemented!");
+	});
+	
+});
+</script>
+
+{% endblock %}
+

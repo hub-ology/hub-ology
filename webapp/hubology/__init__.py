@@ -75,4 +75,6 @@ import hubology.views.sign_in
 import hubology.views.sign_out
 import hubology.views.hub
 import hubology.views.map
+import hubology.views.people
+import hubology.views.profile
 

@@ -88,7 +88,6 @@ def facebook_login():
 def twitter_authorized(resp):
     next_url = request.args.get('next') or url_for('index')
     if resp is None:
-        print u'You denied the request to sign in.'
         return redirect(next_url)
 
     session['twitter_token'] = (
@@ -131,7 +130,6 @@ def twitter_authorized(resp):
 def linkedin_authorized(resp):
     next_url = request.args.get('next') or url_for('index')
     if resp is None:
-        print u'You denied the request to sign in.'
         return redirect(next_url)
 
 

@@ -89,3 +89,8 @@ class HubUser(db.Model):
                                WHERE hubid = :1
                             """, hubid).get()
         return user
+    
+    @staticmethod
+    def all():
+        return db.GqlQuery("""SELECT * FROM HubUser ORDER BY original_insert_date DESC""")
+    

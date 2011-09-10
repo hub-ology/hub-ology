@@ -79,7 +79,7 @@ function use_current_location() {
 {% endwith %}
 
 
-<form action="/profile" class="form-stacked" method="POST">
+<form id="profile_form" action="/profile" class="form-stacked" method="POST">
 <div class="row">
 	<div class="span12 columns offset2">
         <fieldset>
@@ -92,6 +92,7 @@ function use_current_location() {
 					value="{{ current_user.location_name }}"
 				{% endif %}
 				>
+				<input id="location" name="location" type="hidden">
 			  <a id="use_current_location_btn" class="btn">Use Current Location</a>
               <span class="help-block">
 				Don't use your home or work address.  Just specify the town where you want to get involved.<br>
@@ -210,6 +211,28 @@ function use_current_location() {
 </div>
 
 <script>
+
+function geocode_location(location_name) {
+    try{
+        var location;
+        if (location_name) {    
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode( { 'address': address}, function(results, status) {
+                  if (status == google.maps.GeocoderStatus.OK) {            
+                    location = results[0].geometry.location;
+                  } else {
+					console.log(status);
+					console.log(results);					
+				  }
+            });                                                
+        }
+        return location
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}
+
 $(document).ready(function() {
 	
     //When you click on a link with class of poplight and the href starts with a # 
@@ -267,6 +290,33 @@ $(document).ready(function() {
 	$(document).delegate('#delete_profile_confirm_btn', 'click', function(e) {
 		e.preventDefault();
 		window.location = "http://"+window.document.location.host+"/delete-profile";
+	});
+	
+	var geoCodeSubmit = false;
+	
+	$('#profile_form').submit(function() {
+	   if (geoCodeSubmit) {
+		  geoCodeSubmit = false;
+		  return true;
+	   } else {		
+		  //geocode location_name and then submit form
+	      geocoder = new google.maps.Geocoder();
+	      geocoder.geocode( { 'address': $('#location_name').val()}, function(results, status) {
+	            if (status == google.maps.GeocoderStatus.OK) {
+	              locationData = results[0].geometry.location;
+				  if (locationData) {
+				  	$('#location').val(locationData);
+			  	  }
+	            } else {
+					console.log(status);
+					console.log(results);					
+				}
+				geoCodeSubmit = true;
+				//Now submit the form...
+				$('#profile_form').submit();
+	      });
+		  return false;
+	  }	  
 	});
 	
 });

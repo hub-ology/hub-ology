@@ -15,7 +15,15 @@ def profile():
         current_user.email = email
         location_name = request.values.get('location_name')
         current_user.location_name = location_name
-        current_user.set_location(geocode_location(location_name))
+        location = request.values.get('location')
+        logging.info(location)
+        if location:
+            try:
+                location_parts = location[1:-1].split(',')
+                current_user.set_location({'lat':float(location_parts[0]), 'lng':float(location_parts[1])})
+            except:
+                logging.exception("Error setting location")
+                
         classification = request.values.getlist('classification')
         current_user.classification = classification
         current_user.put()

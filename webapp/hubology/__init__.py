@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request, jsonify
 from flask import render_template, current_app
-from flaskext.login import LoginManager
+from flaskext.login import LoginManager, current_user
 from functools import wraps
 import logging
 import simplejson as json
@@ -59,6 +59,9 @@ def page_not_found(e):
 #Setup 500 handler
 @app.errorhandler(500)
 def internal_server_error(e):
+    if current_user:
+        from hubology.views.sign_out import sign_out
+        sign_out()
     return render_template('500.html'), 500
 
 def templated(template=None):

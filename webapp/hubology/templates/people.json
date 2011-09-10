@@ -1,0 +1,24 @@
+{
+    "people":[
+    {% if users %}
+        {% for user in users %}
+        {% if loop.index0 > 0 %},{% endif %}
+        {"name":"{{ user.name }}",
+         "link":"{{ user.link }}",
+         {% if user.location %}
+         "location":{"lat": {{ user.location.lat }}, "lng": {{ user.location.lon }}},
+         {% else %}
+         "location":null,
+         {% endif %}
+         "profile_image_url":"{{ user.profile_image_url }}",
+         {% if user.classification %}
+         "classification":"{{ user.classification|join(', ') }}"
+         {% else %}
+         "classification":null
+         {% endif %}
+        }
+        {% endfor %}
+    {% endif %}
+    
+    ]
+}

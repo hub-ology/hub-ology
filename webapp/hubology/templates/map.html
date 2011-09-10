@@ -4,6 +4,9 @@
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?sensor=false">
 </script>
+<script type="text/javascript"
+    src="/static/js/markerclusterer.js">
+</script>
 {% endblock %}
 
 {% block content %}
@@ -51,6 +54,50 @@
 				$("#map").width($(window).width());					
 			} , false);
 	      }
+	
+		//Construct markers and a MarkerClusterer
+		var markers = [];
+		
+		$.ajax({
+		  url: "http://"+window.document.location.host+"/people/json",
+		  success: function(data) {	
+			var jsonData = jQuery.parseJSON(data);
+			console.log(jsonData);
+						
+			if ( jsonData.people ) {
+				jQuery.each(jsonData.people, function(i, person) {
+					if ( person.location ) {
+						var contentString = '<div id="content">'+
+						    '<img src="'+person.profile_image_url+'">' +
+							'<h3><a href="'+ person.link +'" target="_blank">'+ person.name +'</a></h3>' +
+						    '<div id="bodyContent">'+
+						    '<p>'+ (person.classification ? person.classification : '') +'</p>'+						    
+						    '</div>'+
+						    '</div>';
+
+						var infowindow = new google.maps.InfoWindow({
+						    content: contentString
+						});		
+
+						var marker = new google.maps.Marker({
+						           position: new google.maps.LatLng(person.location.lat, person.location.lng),
+								   title: person.name
+						          });
+			        	markers.push(marker);
+						google.maps.event.addListener(marker, 'click', function() {
+						  infowindow.open(map,marker);
+						});
+					}
+				});
+			}
+			markerClusterer = new MarkerClusterer(map, markers);
+				
+			}					  
+		});
+		
+
+				
+		
 	}
 	
 	get_location(process_location,
@@ -63,7 +110,7 @@
 						alert ('Timeout');
 						break;
 					case error.POSITION_UNAVAILABLE:
-						alert ('Position unavailable');
+						alert ('Current position unavailable');
 						break;
 					case error.PERMISSION_DENIED:
 						alert ('Permission denied');

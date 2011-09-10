@@ -4,9 +4,32 @@ from flask import render_template, current_app
 from flaskext.login import LoginManager
 from functools import wraps
 import logging
+import simplejson as json
+import urllib
+import urllib2
 import uuid
 
 from hubology.models import HubUser
+
+def geocode_location(location_name):    
+    try:
+        location = None
+        if location_name not in ('', None):
+            response = urllib2.urlopen("https://maps.googleapis.com/maps/api/geocode/json?%s" %
+                            urllib.urlencode({'address': location_name, 'sensor':'false'}))
+            data = response.read()
+            geo_info = json.loads(data)
+            results = geo_info.get('results')
+            if results is not None and len(results) > 0:
+                geometry = results[0].get('geometry')
+                if geometry is not None:
+                    location = geometry.get('location')
+        return location
+    except:
+        logging.exception("problem geocoding location")
+        return None
+        
+        
 
 def create_app():
     return Flask(__name__)

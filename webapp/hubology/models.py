@@ -74,10 +74,16 @@ class HubUser(db.Model):
         """ Is this user a mentor?
         """
         return self.is_member_type(u'mentor')
-
         
     def get_id(self):
         return self.hubid
+
+    def set_location(self, location_dict):
+        """ Sets the user's location (lat, lng) based on the supplied dictionary
+        """
+        if location_dict is not None:
+            geo_point = db.GeoPt(location_dict.get('lat', 0.0), location_dict.get('lng', 0.0))
+            self.location = geo_point
     
     @staticmethod
     def find(hubid):
@@ -93,6 +99,10 @@ class HubUser(db.Model):
     @staticmethod
     def all():
         return db.GqlQuery("""SELECT * FROM HubUser ORDER BY original_insert_date DESC""")
+
+    @staticmethod
+    def all_with_location():
+        return db.GqlQuery("""SELECT * FROM HubUser WHERE location > NULL""")
     
     @staticmethod
     def delete(user_key):

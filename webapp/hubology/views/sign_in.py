@@ -13,6 +13,7 @@ import urllib2
 import logging
 
 from hubology.models import HubUser
+from hubology import geocode_location
 
 @app.route('/sign-in')
 @templated('sign-in.html')
@@ -110,6 +111,7 @@ def twitter_authorized(resp):
 
             user.profile_image_url = info.data.get('profile_image_url')
             user.location_name = info.data.get('location')
+            user.set_location(geocode_location(user.location_name))
             user.url = info.data.get('url')
             user.username = resp['screen_name']
             user.link = u'https://twitter.com/#!/%s' % resp['screen_name']

@@ -77,4 +77,5 @@ import hubology.views.hub
 import hubology.views.map
 import hubology.views.people
 import hubology.views.profile
+import hubology.views.delete_profile
 

@@ -2,7 +2,7 @@
 
 {% block extrascripts %}
 <script type="text/javascript"
-    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+    src="http://maps.googleapis.com/maps/api/js?sensor=false">
 </script>
 <script type="text/javascript">
 
@@ -173,7 +173,10 @@ function use_current_location() {
 				          <button type="submit" class="btn primary">Save Changes</button>&nbsp;
 					</div>
 					<div class="span3 columns">				
-						<a id="delete_profile_btn" class="btn danger">Delete Profile</a>
+						<a  id="delete_profile_btn" 
+							href="#?w=500" rel="delete_profile_popup"
+							class="btn danger poplight" 
+							>Delete Profile</a>
 					</div>
 				</div>
 			</div>
@@ -187,9 +190,65 @@ function use_current_location() {
 	</div>
 </div>
 
+<div id="delete_profile_popup" class="modal popup_block">
+	<div class="modal-header">
+	  <h3>Really Delete Your Profile?</h3>
+	  <a href="#" class="close">×</a>
+	</div>
+	<div class="modal-body">
+	  <p>We respect your right to leave the hub-ology community at anytime and for any reason.
+		 If you choose to delete your profile, we'll remove all the data we've saved for you
+		 and log you out of the site.  Should you choose to return at a later time, simply 
+		 sign in again with your favorite account and we'll happily welcome you back.
+		 Thank you for supporting hub-ology!
+	  </p>
+	</div>
+	<div class="modal-footer">
+	  <a href="#" class="btn close">Cancel</a>
+	  <a id="delete_profile_confirm_btn" href="#" class="btn danger">Yes, Delete My Profile</a>
+	</div>
+</div>
+
 <script>
 $(document).ready(function() {
 	
+    //When you click on a link with class of poplight and the href starts with a # 
+    $('a.poplight[href^=#]').click(function() {
+        var popID = $(this).attr('rel'); //Get Popup Name
+        var popURL = $(this).attr('href'); //Get Popup href to define size
+
+        //Pull Query & Variables from href URL
+        var query= popURL.split('?');
+        var dim= query[1].split('&');
+        var popWidth = dim[0].split('=')[1]; //Gets the first query string value
+
+        //Fade in the Popup and add close button
+        $('#' + popID).fadeIn().css({ 'width': Number( popWidth ) });
+
+        //Define margin for center alignment (vertical   horizontal) - we add 80px to the height/width to accomodate for the padding  and border width defined in the css
+        var popMargTop = ($('#' + popID).height() + 80) / 2;
+        var popMargLeft = ($('#' + popID).width() + 80) / 2;
+
+        //Apply Margin to Popup
+        $('#' + popID).css({
+            'margin-top' : -popMargTop,
+            'margin-left' : -popMargLeft
+        });
+
+        //Fade in Background
+        $('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
+        $('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer - .css({'filter' : 'alpha(opacity=80)'}) is used to fix the IE Bug on fading transparencies 
+
+        return false;
+    });
+
+    //Close Popups and Fade Layer
+    $('a.close, #fade').live('click', function() { //When clicking on the close or fade layer...
+        $('#fade , .popup_block').fadeOut(function() {
+            $('#fade').remove();  //fade them both out
+        });
+        return false;
+    });	
 	$(document).delegate('a.close', 'click', function(e) {
 		e.preventDefault();
 		var $this = $(this);
@@ -205,9 +264,9 @@ $(document).ready(function() {
 		use_current_location();
 	});
 
-	$(document).delegate('#delete_profile_btn', 'click', function(e) {
+	$(document).delegate('#delete_profile_confirm_btn', 'click', function(e) {
 		e.preventDefault();
-		alert("Delete Profile Not Yet Implemented!");
+		window.location = "http://"+window.document.location.host+"/delete-profile";
 	});
 	
 });

@@ -94,3 +94,7 @@ class HubUser(db.Model):
     def all():
         return db.GqlQuery("""SELECT * FROM HubUser ORDER BY original_insert_date DESC""")
     
+    @staticmethod
+    def delete(user_key):
+        db.delete(user_key)
+    
